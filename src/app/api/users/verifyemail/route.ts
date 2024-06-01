@@ -8,7 +8,6 @@ connectToDatabase()
 
 export async function POST(req: NextRequest){
     try {
-        
         const reqBody = await req.json()
         const {token} = reqBody
         console.log(token)
