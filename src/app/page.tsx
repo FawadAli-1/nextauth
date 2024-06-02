@@ -24,9 +24,6 @@ export default function Home() {
           <Link href={"/profile"} className={cn(buttonVariants())}>
             Profile
           </Link>
-          <Link href={"/"} className={cn(buttonVariants())}>
-            Logout
-          </Link>
         </div>
       </div>
     </section>
