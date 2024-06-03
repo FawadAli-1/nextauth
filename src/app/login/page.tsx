@@ -26,6 +26,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Check, Loader2 } from "lucide-react";
+import Link from "next/link";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -119,6 +120,7 @@ export default function LoginPage() {
                   "Login"
                 )}
               </Button>
+              <p className="text-slate-800">Create an account? <Link href={"/signup"} className="font-semibold">Sign Up</Link></p>
               {errorMessage ? (
                 <p className="text-red-700 font-medium">No user found. <br /> Make sure to enter correct credentials.</p>
               ) : (

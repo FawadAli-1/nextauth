@@ -40,6 +40,7 @@ export default function SignupPage() {
   const router = useRouter()
   const { toast } = useToast();
   const [loading, setLoading] = useState(false)
+  const [errorMessage, setErrorMessage] = useState(false)
 
   const onSubmit = async (values: z.infer<typeof signupFormSchema>) => {
     console.log(values);
@@ -48,9 +49,19 @@ export default function SignupPage() {
       setLoading(true)
       const response = await axios.post("/api/users/signup", values);
       console.log(response.status)
+      toast({
+        title: "Signing up user",
+        description: "Please wait for a few seconds"
+      })
       form.reset();
       router.push("/verifyemail")
     } catch (error) {
+      setLoading(false)
+      setErrorMessage(true)
+      toast({
+        title: "Sign up failed...",
+        variant: "destructive"
+      })
       console.log(error);
     }
   };
@@ -106,17 +117,13 @@ export default function SignupPage() {
                   </FormItem>
                 )}
               />
-              <Button onClick={()=> {
-                toast({
-                  title: "Signing up user",
-                  description: "Please wait for a few seconds"
-                })
-              }} type="submit" disabled={loading}>{loading? (
+              <Button type="submit" disabled={loading}>{loading? (
                 <>
                 <Loader2 className="animate-spin mr-1"/>
                 <p>Submitting</p>
                 </>
-              ):"Submit"}</Button>
+              ):"Sign up"}</Button>
+              {errorMessage ? <p className="text-red-600">Error signing up, please retry...</p> : ""}
             </form>
           </Form>
         </CardContent>
